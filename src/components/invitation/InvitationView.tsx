@@ -78,6 +78,7 @@ export default function InvitationView({ settings, guest, wishes }: InvitationVi
         ref={musicRef}
         url={settings.music.url || '/audio/wedding-song.mp3'}
         title={settings.music.title}
+        startTime={settings.music.startTime || 0}
         autoPlay={false}
       />
 

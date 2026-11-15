@@ -506,7 +506,22 @@ export default function WeddingSettingsPage() {
                 className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:border-[#d7ac64] outline-none"
               />
               <p className="text-[11px] text-slate-400 mt-1">
-                Gunakan link langsung ke file audio format .mp3 atau .ogg.
+                Gunakan link langsung ke file audio format .mp3 atau .ogg (default: /audio/sinarengan.mp3).
+              </p>
+            </div>
+            <div>
+              <label className="block font-semibold text-slate-700 uppercase mb-1">Offset Waktu Mulai Lagu (Detik)</label>
+              <input
+                type="number"
+                min="0"
+                step="1"
+                value={settings.music.startTime || 0}
+                onChange={(e) => setSettings({ ...settings, music: { ...settings.music, startTime: Number(e.target.value) || 0 } })}
+                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:border-[#d7ac64] outline-none"
+                placeholder="0"
+              />
+              <p className="text-[11px] text-emerald-600 font-medium mt-1">
+                ✨ File lagu bawaan sudah otomatis dipotong langsung ke bagian tengah (Reff/Chorus) dengan intro instan. Nilai 0 berarti lagu langsung mulai dari bagian reff tersebut.
               </p>
             </div>
           </div>

@@ -20,12 +20,14 @@ interface MusicPlayerProps {
   url?: string;
   autoPlay?: boolean;
   title?: string;
+  startTime?: number;
 }
 
 const MusicPlayer = forwardRef<MusicPlayerHandle, MusicPlayerProps>(function MusicPlayer(
   {
     url = '/audio/sinarengan.mp3',
     autoPlay = false,
+    startTime = 0,
   },
   ref
 ) {
@@ -35,6 +37,9 @@ const MusicPlayer = forwardRef<MusicPlayerHandle, MusicPlayerProps>(function Mus
   const playMusic = async () => {
     if (!audioRef.current) return;
     try {
+      if (startTime > 0 && audioRef.current.currentTime < 1) {
+        audioRef.current.currentTime = startTime;
+      }
       audioRef.current.volume = 0.75;
       await audioRef.current.play();
       setIsPlaying(true);

@@ -27,7 +27,8 @@
     "music": {
       "title": "Denny Caknan Feat Bella Bonita - SINARENGAN",
       "url": "/audio/sinarengan.mp3",
-      "autoPlay": true
+      "autoPlay": true,
+      "startTime": 0
     },
     "events": {
       "akad": {

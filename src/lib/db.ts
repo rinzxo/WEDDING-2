@@ -77,6 +77,7 @@ export interface WeddingSettings {
     title: string;
     url: string;
     autoPlay: boolean;
+    startTime?: number;
   };
   events: {
     akad: {
