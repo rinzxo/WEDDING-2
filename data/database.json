@@ -80,13 +80,15 @@
           "id": "bank-1",
           "bankName": "Bank BNI",
           "accountNumber": "1785798133",
-          "accountHolder": "Ridho Khairuman"
+          "accountHolder": "Ridho Khairuman",
+          "isActive": true
         },
         {
           "id": "bank-2",
           "bankName": "Bank Central Asia (BCA)",
           "accountNumber": "7635241349",
-          "accountHolder": "Martika Larassati"
+          "accountHolder": "Martika Larassati",
+          "isActive": true
         }
       ],
       "physicalGift": {

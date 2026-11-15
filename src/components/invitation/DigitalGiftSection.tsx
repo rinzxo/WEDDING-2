@@ -56,23 +56,28 @@ export default function DigitalGiftSection({ gifts }: DigitalGiftSectionProps) {
     },
   ];
 
-  const bankList = gifts?.bankAccounts && gifts.bankAccounts.length > 0
-    ? gifts.bankAccounts.map((b, idx) => ({
-        id: b.id || `bank-${idx}`,
-        bankName: b.bankName,
-        logo: getBankLogo(b.bankName),
-        accountNumber: b.accountNumber,
-        formattedNumber: b.accountNumber.replace(/(\d{4})(?=\d)/g, '$1 '),
-        accountHolder: b.accountHolder,
-        theme: idx % 2 === 0
-          ? 'from-[#0F2A38] via-[#1A3E54] to-[#0C1F2B]'
-          : 'from-[#0E2448] via-[#193B6F] to-[#0A1A33]',
-        accentColor: idx % 2 === 0 ? '#00D1B2' : '#3B82F6',
-        borderGlow: idx % 2 === 0
-          ? 'border-cyan-500/30 shadow-[0_8px_30px_rgba(15,42,56,0.35)]'
-          : 'border-blue-500/30 shadow-[0_8px_30px_rgba(14,36,72,0.35)]',
-      }))
+  const rawAccounts = gifts?.bankAccounts && gifts.bankAccounts.length > 0
+    ? gifts.bankAccounts
     : defaultBankAccounts;
+
+  // Filter accounts: only show accounts where isActive is not explicitly false
+  const activeAccounts = rawAccounts.filter((b) => b.isActive !== false);
+
+  const bankList = activeAccounts.map((b, idx) => ({
+    id: b.id || `bank-${idx}`,
+    bankName: b.bankName,
+    logo: getBankLogo(b.bankName),
+    accountNumber: b.accountNumber,
+    formattedNumber: b.accountNumber.replace(/(\d{4})(?=\d)/g, '$1 '),
+    accountHolder: b.accountHolder,
+    theme: idx % 2 === 0
+      ? 'from-[#0F2A38] via-[#1A3E54] to-[#0C1F2B]'
+      : 'from-[#0E2448] via-[#193B6F] to-[#0A1A33]',
+    accentColor: idx % 2 === 0 ? '#00D1B2' : '#3B82F6',
+    borderGlow: idx % 2 === 0
+      ? 'border-cyan-500/30 shadow-[0_8px_30px_rgba(15,42,56,0.35)]'
+      : 'border-blue-500/30 shadow-[0_8px_30px_rgba(14,36,72,0.35)]',
+  }));
 
   const physicalGift = gifts?.physicalGift;
 
@@ -134,85 +139,92 @@ export default function DigitalGiftSection({ gifts }: DigitalGiftSectionProps) {
             {showAccounts && (
               <div className="w-full mt-8 flex flex-col gap-5 pt-6 border-t border-slate-200/80 animate-in fade-in zoom-in-95 duration-500">
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
-                  {bankList.map((bank, bankIdx) => (
-                    <div
-                      key={bank.id}
-                      className={`relative w-full rounded-[22px] overflow-hidden p-6 text-left flex flex-col justify-between min-h-[200px] sm:min-h-[220px] transition-all duration-300 hover:scale-[1.02] border bg-gradient-to-br ${bank.theme} ${bank.borderGlow}`}
-                    >
-                      {/* Atmospheric background waves & specular light reflections */}
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent pointer-events-none" />
-                      <div className="absolute -bottom-10 -right-10 w-44 h-44 rounded-full bg-white/[0.04] pointer-events-none blur-xl" />
+                {bankList.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+                    {bankList.map((bank, bankIdx) => (
+                      <div
+                        key={bank.id}
+                        className={`relative w-full rounded-[22px] overflow-hidden p-6 text-left flex flex-col justify-between min-h-[200px] sm:min-h-[220px] transition-all duration-300 hover:scale-[1.02] border bg-gradient-to-br ${bank.theme} ${bank.borderGlow}`}
+                      >
+                        {/* Atmospheric background waves & specular light reflections */}
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent pointer-events-none" />
+                        <div className="absolute -bottom-10 -right-10 w-44 h-44 rounded-full bg-white/[0.04] pointer-events-none blur-xl" />
 
-                      {/* Top Row: Bank Brand Logo & ATM Chip */}
-                      <div className="relative z-10 flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          {bank.logo ? (
-                            <div className="bg-white/95 px-3 py-1.5 rounded-xl shadow-md flex items-center justify-center">
-                              {/* eslint-disable-next-line @next/next/no-img-element */}
-                              <img
-                                src={bank.logo}
-                                alt={bank.bankName}
-                                className="h-5 sm:h-6 w-auto max-w-[85px] sm:max-w-[105px] object-contain"
-                              />
-                            </div>
-                          ) : (
-                            <span className="font-serif text-xl sm:text-2xl font-bold tracking-wider text-white drop-shadow-md">
-                              {bank.bankName}
-                            </span>
-                          )}
+                        {/* Top Row: Bank Brand Logo & ATM Chip */}
+                        <div className="relative z-10 flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            {bank.logo ? (
+                              <div className="bg-white/95 px-3 py-1.5 rounded-xl shadow-md flex items-center justify-center">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                  src={bank.logo}
+                                  alt={bank.bankName}
+                                  className="h-5 sm:h-6 w-auto max-w-[85px] sm:max-w-[105px] object-contain"
+                                />
+                              </div>
+                            ) : (
+                              <span className="font-serif text-xl sm:text-2xl font-bold tracking-wider text-white drop-shadow-md">
+                                {bank.bankName}
+                              </span>
+                            )}
+                          </div>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src="/images/chip-atm.png"
+                            alt="ATM Chip"
+                            className="w-11 h-9 object-contain drop-shadow"
+                          />
                         </div>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src="/images/chip-atm.png"
-                          alt="ATM Chip"
-                          className="w-11 h-9 object-contain drop-shadow"
-                        />
-                      </div>
 
-                      {/* Middle: Number Section - ULTRA CLEAR & LARGE HIGH CONTRAST */}
-                      <div className="relative z-10 my-4 py-1">
-                        <p className="text-[11px] uppercase tracking-[0.2em] font-medium text-[#D7AC64] mb-1.5 drop-shadow-sm">
-                          Nomor Rekening
-                        </p>
-                        <p className="font-mono text-2xl sm:text-[26px] md:text-2xl lg:text-[28px] tracking-[0.16em] font-extrabold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] select-all leading-none">
-                          {bank.formattedNumber}
-                        </p>
-                      </div>
-
-                      {/* Bottom Row: Account Holder & High-Contrast Copy Button */}
-                      <div className="relative z-10 pt-3 border-t border-white/15 flex items-center justify-between gap-2">
-                        <div className="min-w-0 flex-1">
-                          <p className="text-[10px] text-slate-300 uppercase tracking-wider font-light">
-                            Atas Nama
+                        {/* Middle: Number Section - ULTRA CLEAR & LARGE HIGH CONTRAST */}
+                        <div className="relative z-10 my-4 py-1">
+                          <p className="text-[11px] uppercase tracking-[0.2em] font-medium text-[#D7AC64] mb-1.5 drop-shadow-sm">
+                            Nomor Rekening
                           </p>
-                          <p className="text-xs sm:text-sm font-semibold text-white tracking-wide truncate mt-0.5">
-                            {bank.accountHolder}
+                          <p className="font-mono text-2xl sm:text-[26px] md:text-2xl lg:text-[28px] tracking-[0.16em] font-extrabold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)] select-all leading-none">
+                            {bank.formattedNumber}
                           </p>
                         </div>
 
-                        <button
-                          onClick={() => handleCopy(bank.accountNumber, bank.id)}
-                          type="button"
-                          className="inline-flex items-center gap-1.5 bg-[#D7AC64] hover:bg-[#c99e56] text-[#0f172a] font-bodebeck text-xs font-bold px-4 py-2 rounded-xl shadow-md transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer shrink-0"
-                        >
-                          {copiedId === bank.id ? (
-                            <>
-                              <Check className="w-4 h-4 text-emerald-800 stroke-[3]" />
-                              <span>Tersalin!</span>
-                            </>
-                          ) : (
-                            <>
-                              <Copy className="w-3.5 h-3.5" />
-                              <span>Salin Nomor</span>
-                            </>
-                          )}
-                        </button>
-                      </div>
+                        {/* Bottom Row: Account Holder & High-Contrast Copy Button */}
+                        <div className="relative z-10 pt-3 border-t border-white/15 flex items-center justify-between gap-2">
+                          <div className="min-w-0 flex-1">
+                            <p className="text-[10px] text-slate-300 uppercase tracking-wider font-light">
+                              Atas Nama
+                            </p>
+                            <p className="text-xs sm:text-sm font-semibold text-white tracking-wide truncate mt-0.5">
+                              {bank.accountHolder}
+                            </p>
+                          </div>
 
-                    </div>
-                  ))}
-                </div>
+                          <button
+                            onClick={() => handleCopy(bank.accountNumber, bank.id)}
+                            type="button"
+                            className="inline-flex items-center gap-1.5 bg-[#D7AC64] hover:bg-[#c99e56] text-[#0f172a] font-bodebeck text-xs font-bold px-4 py-2 rounded-xl shadow-md transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer shrink-0"
+                          >
+                            {copiedId === bank.id ? (
+                              <>
+                                <Check className="w-4 h-4 text-emerald-800 stroke-[3]" />
+                                <span>Tersalin!</span>
+                              </>
+                            ) : (
+                              <>
+                                <Copy className="w-3.5 h-3.5" />
+                                <span>Salin Nomor</span>
+                              </>
+                            )}
+                          </button>
+                        </div>
+
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="w-full py-8 px-6 rounded-2xl bg-slate-50/90 border border-slate-200/80 text-center text-slate-600 text-sm">
+                    <p className="font-medium text-slate-700">Rekening Transfer Saat Ini Sedang Dinonaktifkan</p>
+                    <p className="text-xs text-slate-500 mt-1">Silakan gunakan opsi pengiriman kado fisik di bawah jika berkenan.</p>
+                  </div>
+                )}
 
                 {/* Optional Physical Gift Address */}
                 {physicalGift && physicalGift.address && (

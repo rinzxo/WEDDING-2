@@ -44,6 +44,7 @@ export interface BankAccount {
   accountNumber: string;
   accountHolder: string;
   logoUrl?: string;
+  isActive?: boolean;
 }
 
 export interface WeddingSettings {
