@@ -55,7 +55,7 @@ export default function EventsSection({ events, eventDate = 'Sabtu, 12 Desember 
       time: events.akad.time || 'Pukul : 08.00 WIB',
       venue: events.akad.venue || 'KEDIAMAN MEMPELAI WANITA',
       address: events.akad.address || 'Villa Gading Harapan Blok WA1 No.12A, Rt.002/Rw.021, Jl.Kurmatama, Kebalen, Babelan, Kab.Bekasi, Jawa Barat',
-      mapsUrl: events.akad.mapsUrl || 'https://maps.google.com/?q=Villa+Gading+Harapan+Blok+WA1+Kebalen+Babelan+Bekasi',
+      mapsUrl: events.akad.mapsUrl || 'https://maps.app.goo.gl/eoDsvfuK7e22VWY3A',
     },
     {
       title: events.resepsi.title || 'Resepsi',
@@ -65,7 +65,7 @@ export default function EventsSection({ events, eventDate = 'Sabtu, 12 Desember 
       time: events.resepsi.time || 'Pukul : 11.00 - 19.00 WIB',
       venue: events.resepsi.venue || 'KEDIAMAN MEMPELAI WANITA',
       address: events.resepsi.address || 'Villa Gading Harapan Blok WA1 No.12A, Rt.002/Rw.021, Jl.Kurmatama, Kebalen, Babelan, Kab.Bekasi, Jawa Barat',
-      mapsUrl: events.resepsi.mapsUrl || 'https://maps.google.com/?q=Villa+Gading+Harapan+Blok+WA1+Kebalen+Babelan+Bekasi',
+      mapsUrl: events.resepsi.mapsUrl || 'https://maps.app.goo.gl/eoDsvfuK7e22VWY3A',
     },
   ];
 
