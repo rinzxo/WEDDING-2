@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>The Wedding of Habib & Adiba</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets/chip.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- ==================== FULLSCREEN OPENING COVER MODAL ==================== -->
+  <div id="coverModal">
+    <div class="cover-bg-image"></div>
+    <div class="cover-overlay"></div>
+
+    <div class="cover-content">
+      <p class="font-serif text-gold" style="letter-spacing: 3px; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 8px;">The Wedding of</p>
+      
+      <div class="cover-ring-frame">
+        <div class="cover-ring-inner">
+          <img src="/assets/couple-hero.jpg" alt="Habib & Adiba">
+        </div>
+      </div>
+
+      <h1 class="font-serif gold-text-gradient" style="font-size: 2.2rem; line-height: 1.2; margin-bottom: 6px;">Habib & Adiba</h1>
+      <p style="font-size: 0.85rem; color: #cbd5e1; letter-spacing: 1px;">Senin, 28 Desember 2026</p>
+
+      <div class="cover-guest-box">
+        <p style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1.5px; color: #cbd5e1;">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
+        <div id="coverGuestName" class="cover-guest-name">Nama Tamu Undangan</div>
+        <p id="coverGuestCategory" style="font-size: 0.72rem; color: var(--gold-light); margin-top: 4px;"></p>
+      </div>
+
+      <button id="btnOpenInvite" class="btn-open-invite">
+        <i data-lucide="mail-open" style="width: 18px; height: 18px;"></i>
+        <span>Buka Undangan</span>
+      </button>
+    </div>
+
+    <div style="position: relative; z-index: 2; font-size: 0.7rem; color: #94a3b8; letter-spacing: 0.5px;">
+      Mohon maaf apabila ada kesalahan penulisan nama/gelar
+    </div>
+  </div>
+
+  <!-- Audio Background Player -->
+  <audio id="weddingAudio" loop preload="auto">
+    <source src="/assets/music.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Floating Music Toggle -->
+  <div id="musicToggle" class="floating-music" title="Putar / Jeda Musik">
+    <i id="musicIcon" data-lucide="disc-3" style="width: 22px; height: 22px;"></i>
+  </div>
+
+  <!-- ==================== MAIN INVITATION CONTAINER ==================== -->
+  <main class="app-container bg-ornament">
+
+    <!-- 1. HERO SECTION -->
+    <section id="home" class="hero-section">
+      <p class="inv-section-subtitle text-gold" style="margin-bottom: 12px;">Walimatul 'Urs</p>
+      
+      <div class="hero-arch-frame">
+        <div class="hero-arch-inner">
+          <img src="/assets/couple-hero.jpg" alt="Habib & Adiba">
+        </div>
+      </div>
+
+      <p class="font-serif" style="letter-spacing: 2px; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase;">The Wedding of</p>
+      <h1 class="hero-names gold-text-gradient">Habib &amp; Adiba</h1>
+      
+      <div class="hero-date-badge">
+        <i data-lucide="calendar" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px; color: var(--gold-accent);"></i>
+        <span>Senin, 28 Desember 2026</span>
+      </div>
+
+      <!-- COUNTDOWN TIMER -->
+      <div class="countdown-box">
+        <div class="countdown-item">
+          <div id="cdDays" class="countdown-num">00</div>
+          <div class="countdown-label">Hari</div>
+        </div>
+        <div class="countdown-item">
+          <div id="cdHours" class="countdown-num">00</div>
+          <div class="countdown-label">Jam</div>
+        </div>
+        <div class="countdown-item">
+          <div id="cdMinutes" class="countdown-num">00</div>
+          <div class="countdown-label">Menit</div>
+        </div>
+        <div class="countdown-item">
+          <div id="cdSeconds" class="countdown-num">00</div>
+          <div class="countdown-label">Detik</div>
+        </div>
+      </div>
+
+      <!-- QUOTE AR-RUM -->
+      <div style="background: #ffffff; border-radius: 18px; padding: 25px 20px; border: 1px solid rgba(215, 172, 100, 0.25); box-shadow: var(--shadow-luxury); margin-top: 20px;">
+        <p class="font-serif text-gold" style="font-size: 1.25rem; font-weight: 700; margin-bottom: 12px;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+        <p class="font-script" style="font-size: 0.95rem; color: var(--secondary-navy); line-height: 1.7; font-style: italic; margin-bottom: 12px;">
+          “Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berpikir.”
+        </p>
+        <p style="font-size: 0.78rem; font-weight: 700; color: var(--gold-dark); text-transform: uppercase; letter-spacing: 1px;">(QS. Ar-Rum: 21)</p>
+      </div>
+    </section>
+
+    <!-- 2. COUPLE SECTION -->
+    <section id="couple" class="inv-section">
+      <h2 class="inv-section-title">Mempelai</h2>
+      <p class="inv-section-subtitle">Groom &amp; Bride</p>
+      
+      <div class="divider-gold">
+        <i data-lucide="heart" style="width: 14px; height: 14px; color: var(--gold-accent);"></i>
+      </div>
+
+      <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 30px; padding: 0 10px;">
+        Assalamu’alaikum Warahmatullahi Wabarakatuh.<br>
+        Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan syukuran pernikahan putra-putri kami:
+      </p>
+
+      <!-- GROOM -->
+      <div class="couple-card">
+        <div class="couple-photo-wrapper">
+          <div class="couple-photo-inner">
+            <img src="/assets/groom.jpg" alt="Habib Yulianto">
+          </div>
+        </div>
+        <h3 id="groomName" class="couple-fullname">Habib Yulianto</h3>
+        <p id="groomParents" class="couple-parents">
+          Putra Kedua dari<br>
+          <strong>Bpk. M. Dawam</strong> &amp; <strong>(Almh) Ibu Dewi Sudarwati</strong>
+        </p>
+        <a id="groomIg" href="https://instagram.com/habib_yulianto" target="_blank" class="couple-ig-btn">
+          <i data-lucide="instagram" style="width: 14px; height: 14px;"></i>
+          <span>@habib_yulianto</span>
+        </a>
+      </div>
+
+      <!-- AMPERSAND DIVIDER -->
+      <div style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--gold-accent); margin: 10px 0;">&amp;</div>
+
+      <!-- BRIDE -->
+      <div class="couple-card">
+        <div class="couple-photo-wrapper">
+          <div class="couple-photo-inner">
+            <img src="/assets/bride.jpg" alt="Adiba Putri Syakila">
+          </div>
+        </div>
+        <h3 id="brideName" class="couple-fullname">Adiba Putri Syakila</h3>
+        <p id="brideParents" class="couple-parents">
+          Putri Pertama dari<br>
+          <strong>Bpk. Anas Rifai</strong> &amp; <strong>Ibu Kholifah</strong>
+        </p>
+        <a id="brideIg" href="https://instagram.com/adiba_syakila" target="_blank" class="couple-ig-btn">
+          <i data-lucide="instagram" style="width: 14px; height: 14px;"></i>
+          <span>@adiba_syakila</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 3. EVENT SECTION -->
+    <section id="event" class="inv-section">
+      <h2 class="inv-section-title">Waktu &amp; Tempat</h2>
+      <p class="inv-section-subtitle">Save The Date</p>
+      
+      <div class="divider-gold">
+        <i data-lucide="calendar" style="width: 14px; height: 14px; color: var(--gold-accent);"></i>
+      </div>
+
+      <!-- AKAD NIKAH -->
+      <div class="event-card">
+        <div class="event-icon-circle">
+          <i data-lucide="heart-handshake" style="width: 24px; height: 24px;"></i>
+        </div>
+        <h3 class="event-title">Akad Nikah</h3>
+        <p style="font-size: 0.88rem; font-weight: 600; color: var(--secondary-navy);">Senin, 28 Desember 2026</p>
+        <div class="event-time-badge">
+          <i data-lucide="clock" style="width: 13px; height: 13px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i>
+          <span id="akadTime">Pukul : 08.00 WIB</span>
+        </div>
+        <div class="event-venue" id="eventVenueAkad">KEDIAMAN MEMPELAI WANITA</div>
+        <div class="event-address" id="eventAddressAkad">Ds Pagu, Wates, Kediri, Jawa Timur</div>
+        
+        <a id="mapBtnAkad" href="https://maps.google.com/?q=Pagu+Wates+Kediri" target="_blank" class="btn-map">
+          <i data-lucide="map-pin" style="width: 14px; height: 14px;"></i>
+          <span>Buka Google Maps</span>
+        </a>
+      </div>
+
+      <!-- RESEPSI -->
+      <div class="event-card">
+        <div class="event-icon-circle">
+          <i data-lucide="glass-water" style="width: 24px; height: 24px;"></i>
+        </div>
+        <h3 class="event-title">Resepsi Pernikahan</h3>
+        <p style="font-size: 0.88rem; font-weight: 600; color: var(--secondary-navy);">Senin, 28 Desember 2026</p>
+        <div class="event-time-badge">
+          <i data-lucide="clock" style="width: 13px; height: 13px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i>
+          <span id="resepsiTime">Pukul : 10.00 WIB - Selesai</span>
+        </div>
+        <div class="event-venue" id="eventVenueResepsi">KEDIAMAN MEMPELAI WANITA</div>
+        <div class="event-address" id="eventAddressResepsi">Ds Pagu, Wates, Kediri, Jawa Timur</div>
+        
+        <a id="mapBtnResepsi" href="https://maps.google.com/?q=Pagu+Wates+Kediri" target="_blank" class="btn-map">
+          <i data-lucide="map-pin" style="width: 14px; height: 14px;"></i>
+          <span>Buka Google Maps</span>
+        </a>
+      </div>
+
+      <!-- LIVE STREAMING -->
+      <div class="event-card" style="background: linear-gradient(135deg, #2b3951, #1a2332); color: #ffffff;">
+        <div class="event-icon-circle" style="background: rgba(215, 172, 100, 0.2); border-color: var(--gold-light); color: var(--gold-light);">
+          <i data-lucide="video" style="width: 24px; height: 24px;"></i>
+        </div>
+        <h3 class="event-title text-gold">Live Streaming</h3>
+        <p style="font-size: 0.82rem; color: #cbd5e1; margin-bottom: 12px; line-height: 1.5;">
+          Kami mengundang Bapak/Ibu/Saudara/i untuk menyaksikan pernikahan kami secara virtual yang disiarkan langsung melalui media sosial.
+        </p>
+        <a id="liveBtn" href="https://instagram.com/Habib" target="_blank" class="btn-open-invite" style="font-size: 0.8rem; padding: 10px 22px;">
+          <i data-lucide="play-circle" style="width: 16px; height: 16px;"></i>
+          <span>Tonton Live Streaming</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 4. LOVE STORY -->
+    <section id="story" class="inv-section">
+      <h2 class="inv-section-title">Kisah Cinta</h2>
+      <p class="inv-section-subtitle">Our Journey of Love</p>
+      
+      <div class="divider-gold">
+        <i data-lucide="sparkles" style="width: 14px; height: 14px; color: var(--gold-accent);"></i>
+      </div>
+
+      <div class="story-timeline" id="storyTimeline">
+        <!-- Dynamic story items from DB -->
+      </div>
+    </section>
+
+    <!-- 5. PHOTO GALLERY -->
+    <section id="gallery" class="inv-section">
+      <h2 class="inv-section-title">Galeri Foto</h2>
+      <p class="inv-section-subtitle">Captured Moments</p>
+      
+      <div class="divider-gold">
+        <i data-lucide="camera" style="width: 14px; height: 14px; color: var(--gold-accent);"></i>
+      </div>
+
+      <div class="gallery-grid" id="galleryGrid">
+        <!-- Dynamic Photos -->
+      </div>
+    </section>
+
+    <!-- 6. AMPLOP DIGITAL / WEDDING GIFT -->
+    <section id="gift" class="inv-section">
+      <h2 class="inv-section-title">Amplop Digital</h2>
+      <p class="inv-section-subtitle">Tanda Kasih</p>
+      
+      <div class="divider-gold">
+        <i data-lucide="gift" style="width: 14px; height: 14px; color: var(--gold-accent);"></i>
+      </div>
+
+      <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 25px;">
+        Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika memberi adalah ungkapan tanda kasih, Anda dapat mentransfer melalui rekening berikut:
+      </p>
+
+      <!-- BANK ACCOUNT CARD 1: BCA -->
+      <div class="atm-card-wrapper">
+        <div class="atm-top-row">
+          <img src="/assets/chip.png" alt="Chip" class="atm-chip">
+          <img src="/assets/bca.webp" alt="BCA" class="atm-bank-logo">
+        </div>
+        <div>
+          <div class="atm-label">Nomor Rekening</div>
+          <div class="atm-number" id="accNum1">1234 5678</div>
+        </div>
+        <div class="atm-holder-row">
+          <div>
+            <div class="atm-label">Pemilik Rekening</div>
+            <div class="atm-name" id="accHolder1">HABIB YULIANTO</div>
+          </div>
+          <button class="btn-copy-account" onclick="copyText('12345678', 'Nomor rekening BCA berhasil disalin!')">
+            <i data-lucide="copy" style="width: 13px; height: 13px;"></i>
+            <span>Salin Rekening</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- BANK ACCOUNT CARD 2: MANDIRI -->
+      <div class="atm-card-wrapper" style="background: linear-gradient(135deg, #1e3a5f, #0f243a);">
+        <div class="atm-top-row">
+          <img src="/assets/chip.png" alt="Chip" class="atm-chip">
+          <span style="font-family: var(--font-serif); font-size: 1.1rem; font-weight: 700; letter-spacing: 1px; color: #f59e0b;">MANDIRI</span>
+        </div>
+        <div>
+          <div class="atm-label">Nomor Rekening</div>
+          <div class="atm-number" id="accNum2">8765 4321</div>
+        </div>
+        <div class="atm-holder-row">
+          <div>
+            <div class="atm-label">Pemilik Rekening</div>
+            <div class="atm-name" id="accHolder2">ADIBA PUTRI SYAKILA</div>
+          </div>
+          <button class="btn-copy-account" onclick="copyText('87654321', 'Nomor rekening Mandiri berhasil disalin!')">
+            <i data-lucide="copy" style="width: 13px; height: 13px;"></i>
+            <span>Salin Rekening</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- PHYSICAL GIFT ADDRESS -->
+      <div class="event-card" style="margin-top: 25px; text-align: left;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+          <div class="event-icon-circle" style="margin: 0; width: 40px; height: 40px;">
+            <i data-lucide="package" style="width: 20px; height: 20px;"></i>
+          </div>
+          <div>
+            <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--primary-navy);">Kirim Kado / Hadiah Fisik</h4>
+            <p style="font-size: 0.75rem; color: var(--text-muted);">Alamat Pengiriman Penerima</p>
+          </div>
+        </div>
+
+        <div style="background: #f8fafc; border-radius: 12px; padding: 14px; font-size: 0.82rem; line-height: 1.6; margin-bottom: 14px; border: 1px solid #e2e8f0;">
+          <div id="giftRecipient"><strong>Penerima:</strong> Habib Yulianto</div>
+          <div id="giftPhone"><strong>No. HP:</strong> 081234567890</div>
+          <div id="giftAddress"><strong>Alamat:</strong> Ds Pagu Kec. Wates Kab. Kediri, Jawa Timur</div>
+        </div>
+
+        <button class="btn-map" style="width: 100%; justify-content: center;" onclick="copyText('Ds Pagu Kec. Wates Kab. Kediri, Jawa Timur (Penerima: Habib Yulianto - 081234567890)', 'Alamat pengiriman berhasil disalin!')">
+          <i data-lucide="copy" style="width: 14px; height: 14px;"></i>
+          <span>Salin Alamat Pengiriman</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ==================== 7. QR CODE PRESENSI KEHADIRAN (FITUR SPESIAL) ==================== -->
+    <section id="presensi" class="inv-section">
+      <h2 class="inv-section-title">Presensi Digital</h2>
+      <p class="inv-section-subtitle">QR Code Tamu Undangan</p>
+      
+      <div class="divider-gold">
+        <i data-lucide="qr-code" style="width: 14px; height: 14px; color: var(--gold-accent);"></i>
+      </div>
+
+      <div class="qr-pass-card">
+        <div class="qr-pass-badge">
+          <i data-lucide="ticket" style="width: 14px; height: 14px;"></i>
+          <span>OFFICIAL GUEST PASS</span>
+        </div>
+
+        <h3 id="qrGuestName" class="font-serif" style="font-size: 1.35rem; color: var(--primary-navy); margin-top: 6px;">Nama Tamu Undangan</h3>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px;">
+          Kode Tamu: <strong id="qrGuestCode" class="text-gold" style="font-family: monospace; font-size: 0.95rem;">GUEST-XXXX</strong>
+        </p>
+        <p style="font-size: 0.78rem; color: var(--text-muted);">
+          Kuota Undangan: <strong id="qrGuestPax">1 Orang</strong>
+        </p>
+
+        <!-- QR Code Canvas Display -->
+        <div class="qr-code-box">
+          <div id="qrcode"></div>
+        </div>
+
+        <div id="qrStatusBadge" class="qr-status-indicator status-notchecked">
+          <i data-lucide="info" style="width: 13px; height: 13px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i>
+          <span id="qrStatusText">Belum Melakukan Presensi</span>
+        </div>
+
+        <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin: 12px 0;">
+          Tunjukkan QR Code ini kepada panitia penerima tamu di pintu masuk untuk konfirmasi kehadiran langsung secara cepat.
+        </p>
+
+        <button id="btnDownloadQr" class="btn-download-qr">
+          <i data-lucide="download" style="width: 15px; height: 15px;"></i>
+          <span>Unduh Kartu QR Presensi</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 8. RSVP & WISHES -->
+    <section id="rsvp" class="inv-section">
+      <h2 class="inv-section-title">Ucapan &amp; Doa</h2>
+      <p class="inv-section-subtitle">RSVP &amp; Wishes</p>
+      
+      <div class="divider-gold">
+        <i data-lucide="message-square-heart" style="width: 14px; height: 14px; color: var(--gold-accent);"></i>
+      </div>
+
+      <!-- FORM -->
+      <form id="rsvpForm" class="rsvp-form-card">
+        <div class="form-group">
+          <label class="form-label">Nama Lengkap</label>
+          <input type="text" id="rsvpName" class="form-input" placeholder="Masukkan nama Anda..." required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Konfirmasi Kehadiran</label>
+          <div class="attendance-pills">
+            <label class="pill-option">
+              <input type="radio" name="attendance" value="hadir" checked>
+              <div class="pill-label">
+                <i data-lucide="check-circle" style="width: 16px; height: 16px; color: #16a34a;"></i>
+                <span>Hadir</span>
+              </div>
+            </label>
+            <label class="pill-option">
+              <input type="radio" name="attendance" value="tidak_hadir">
+              <div class="pill-label">
+                <i data-lucide="x-circle" style="width: 16px; height: 16px; color: #dc2626;"></i>
+                <span>Tidak Hadir</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group" id="paxGroup">
+          <label class="form-label">Jumlah Tamu Hadir</label>
+          <select id="rsvpPax" class="form-input">
+            <option value="1">1 Orang</option>
+            <option value="2" selected>2 Orang</option>
+            <option value="3">3 Orang</option>
+            <option value="4">4 Orang</option>
+            <option value="5">5 Orang</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Ucapan &amp; Doa Restu</label>
+          <textarea id="rsvpMessage" class="form-textarea" rows="3" placeholder="Tuliskan doa restu dan harapan terbaik untuk kedua mempelai..." required></textarea>
+        </div>
+
+        <button type="submit" id="btnSubmitRsvp" class="btn-submit-rsvp">
+          <i data-lucide="send" style="width: 16px; height: 16px;"></i>
+          <span>Kirim Ucapan &amp; Konfirmasi</span>
+        </button>
+      </form>
+
+      <!-- LIVE WISHES FEED -->
+      <div style="text-align: left; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 0.85rem; font-weight: 700; color: var(--primary-navy);">Daftar Ucapan &amp; Doa Restu</span>
+        <span id="wishesCountBadge" style="font-size: 0.72rem; background: rgba(215, 172, 100, 0.2); color: var(--gold-dark); padding: 2px 8px; border-radius: 12px; font-weight: 700;">0 Ucapan</span>
+      </div>
+
+      <div class="wishes-container" id="wishesContainer">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- 9. CLOSING & THANK YOU -->
+    <section class="inv-section" style="padding-bottom: 40px;">
+      <h2 class="font-serif gold-text-gradient" style="font-size: 1.8rem; margin-bottom: 12px;">Terima Kasih</h2>
+      
+      <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 25px;">
+        Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kami.
+      </p>
+
+      <p class="font-serif text-navy" style="font-weight: 700; font-size: 1.1rem; margin-bottom: 8px;">Wassalamu’alaikum Warahmatullahi Wabarakatuh</p>
+      <p class="font-serif text-gold" style="font-size: 1.6rem; font-weight: 700; margin-bottom: 30px;">Habib &amp; Adiba</p>
+
+      <div style="font-size: 0.75rem; color: #94a3b8; border-top: 1px solid #e2e8f0; padding-top: 20px;">
+        Made with ❤ for Habib &amp; Adiba Wedding<br>
+        <a href="/admin" style="color: var(--gold-accent); text-decoration: none; margin-top: 8px; display: inline-block;">
+          <i data-lucide="shield" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i>
+          <span>Akses Admin Dashboard</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ==================== FLOATING BOTTOM NAVIGATION ==================== -->
+    <nav class="bottom-nav">
+      <a href="#home" class="bottom-nav-item active" title="Sampul">
+        <i data-lucide="home"></i>
+        <span>Sampul</span>
+      </a>
+      <a href="#couple" class="bottom-nav-item" title="Mempelai">
+        <i data-lucide="heart"></i>
+        <span>Mempelai</span>
+      </a>
+      <a href="#event" class="bottom-nav-item" title="Acara">
+        <i data-lucide="calendar"></i>
+        <span>Acara</span>
+      </a>
+      <a href="#story" class="bottom-nav-item" title="Cerita">
+        <i data-lucide="sparkles"></i>
+        <span>Cerita</span>
+      </a>
+      <a href="#gallery" class="bottom-nav-item" title="Galeri">
+        <i data-lucide="image"></i>
+        <span>Galeri</span>
+      </a>
+      <a href="#gift" class="bottom-nav-item" title="Hadiah">
+        <i data-lucide="gift"></i>
+        <span>Hadiah</span>
+      </a>
+      <a href="#presensi" class="bottom-nav-item" title="QR Code">
+        <i data-lucide="qr-code"></i>
+        <span>Presensi</span>
+      </a>
+      <a href="#rsvp" class="bottom-nav-item" title="RSVP">
+        <i data-lucide="message-square"></i>
+        <span>RSVP</span>
+      </a>
+    </nav>
+  </main>
+
+  <!-- LIGHTBOX MODAL -->
+  <div id="lightboxModal">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <img id="lightboxImg" src="" alt="Expanded Preview">
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast">
+    <i data-lucide="check-circle" style="width: 16px; height: 16px; color: var(--gold-accent);"></i>
+    <span id="toastText">Teks berhasil disalin!</span>
+  </div>
+
+  <!-- VENDOR SCRIPTS -->
+  <script src="/vendor/lucide.min.js"></script>
+  <script src="/vendor/qrcode.min.js"></script>
+  
+  <!-- APP CLIENT SCRIPT -->
+  <script src="/js/app.js"></script>
+</body>
+</html>

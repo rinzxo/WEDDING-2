@@ -1,0 +1,208 @@
+{
+  "settings": {
+    "groom": {
+      "fullName": "Ridho Khairuman",
+      "nickname": "Ridho",
+      "fatherName": "Bapak Dadang Mulyana",
+      "motherName": "Ibu Zainab",
+      "childOrder": "Putra Pertama",
+      "instagram": "https://instagram.com/ridho",
+      "photoUrl": "/images/prewedding/groom-ridho.jpg"
+    },
+    "bride": {
+      "fullName": "Martika Larassati., S.M.",
+      "nickname": "Tika",
+      "fatherName": "Bapak Sutikno",
+      "motherName": "Ibu Tumisih",
+      "childOrder": "Putri Pertama",
+      "instagram": "https://instagram.com/tika",
+      "photoUrl": "/images/prewedding/bride-tika.jpg"
+    },
+    "eventDate": "Sabtu, 12 Desember 2026",
+    "countdownTarget": "2026-12-12T08:00:00+07:00",
+    "quranVerse": {
+      "surah": "QS. Ar-Rum : 21",
+      "translation": "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir."
+    },
+    "music": {
+      "title": "Denny Caknan Feat Bella Bonita - SINARENGAN",
+      "url": "/audio/sinarengan.mp3",
+      "autoPlay": true
+    },
+    "events": {
+      "akad": {
+        "title": "Akad Nikah",
+        "date": "Sabtu, 12 Desember 2026",
+        "time": "Pukul : 08.00 WIB",
+        "venue": "Kediaman Mempelai Wanita",
+        "address": "Villa Gading Harapan Blok WA1 No.12A, Rt.002/Rw.021, Jl.Kurmatama, Kebalen, Babelan, Kab.Bekasi, Jawa Barat",
+        "mapsUrl": "https://maps.google.com/?q=Villa+Gading+Harapan+Blok+WA1+Kebalen+Babelan+Bekasi"
+      },
+      "resepsi": {
+        "title": "Resepsi Pernikahan",
+        "date": "Sabtu, 12 Desember 2026",
+        "time": "Pukul : 11.00 - 19.00 WIB",
+        "venue": "Kediaman Mempelai Wanita",
+        "address": "Villa Gading Harapan Blok WA1 No.12A, Rt.002/Rw.021, Jl.Kurmatama, Kebalen, Babelan, Kab.Bekasi, Jawa Barat",
+        "mapsUrl": "https://maps.google.com/?q=Villa+Gading+Harapan+Blok+WA1+Kebalen+Babelan+Bekasi"
+      }
+    },
+    "liveStream": {
+      "enabled": true,
+      "title": "Live Streaming Pernikahan",
+      "time": "Sabtu, 12 Desember 2026 | Pukul 08.00 WIB",
+      "account": "@tika_ridho",
+      "url": "https://instagram.com"
+    },
+    "loveStory": [
+      {
+        "id": "ls-1",
+        "title": "Awal Cerita",
+        "year": "2022",
+        "description": "Berawal dari pertemuan sederhana, kami saling mengenal dan mulai berbagi banyak cerita. Tanpa disadari, kebersamaan itu tumbuh menjadi rasa nyaman yang semakin kuat dari hari ke hari."
+      },
+      {
+        "id": "ls-2",
+        "title": "Lamaran",
+        "year": "2025",
+        "description": "Dengan niat yang tulus dan restu keluarga, kami memutuskan untuk melangkah ke tahap yang lebih serius. Momen lamaran menjadi awal dari perjalanan baru yang penuh harapan dan doa baik."
+      },
+      {
+        "id": "ls-3",
+        "title": "Pernikahan",
+        "year": "2026",
+        "description": "Kini kami sampai pada hari yang kami nantikan, hari di mana dua hati dipersatukan dalam ikatan suci pernikahan. Semoga langkah ini menjadi awal kehidupan baru yang penuh cinta, kebahagiaan, dan keberkahan."
+      }
+    ],
+    "digitalGifts": {
+      "bankAccounts": [
+        {
+          "id": "bank-1",
+          "bankName": "Bank BNI",
+          "accountNumber": "1785798133",
+          "accountHolder": "Ridho Khairuman"
+        },
+        {
+          "id": "bank-2",
+          "bankName": "Bank Central Asia (BCA)",
+          "accountNumber": "7635241349",
+          "accountHolder": "Martika Larassati"
+        }
+      ],
+      "physicalGift": {
+        "recipientName": "Tika & Ridho",
+        "phone": "",
+        "address": "Villa Gading Harapan Blok WA1 No.12A, Rt.002/Rw.021, Jl.Kurmatama, Kebalen, Babelan, Kab.Bekasi, Jawa Barat"
+      }
+    },
+    "gallery": [
+      "/images/prewedding/gallery-blue-stairs-wide.jpg",
+      "/images/prewedding/gallery-blue-arch.jpg",
+      "/images/prewedding/gallery-blue-stairs-hands.jpg",
+      "/images/prewedding/gallery-casual-stand.jpg",
+      "/images/prewedding/gallery-lamaran.jpg",
+      "/images/prewedding/gallery-casual-flowers.jpg",
+      "/images/prewedding/gallery-traditional-kneel.jpg",
+      "/images/prewedding/gallery-traditional-chair.jpg",
+      "/images/prewedding/story-college.jpg",
+      "/images/prewedding/cover.jpg"
+    ]
+  },
+  "guests": [
+    {
+      "id": "gst-001",
+      "name": "Bpk. Rahmat Hidayat & Partner",
+      "slug": "rahmat-hidayat",
+      "code": "WED-RH-8419",
+      "phone": "",
+      "category": "VIP",
+      "tableOrSession": "Sesi 1 (11.00 - 14.00 WIB)",
+      "pax": 2,
+      "rsvpStatus": "attending",
+      "rsvpPax": 2,
+      "rsvpMessage": "Selamat berbahagia Tika & Ridho! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah.",
+      "rsvpAt": "2026-11-15T12:27:02.855Z",
+      "isCheckedIn": true,
+      "createdAt": "2026-11-11T11:43:12.824Z",
+      "checkedInAt": "2026-11-11T11:45:58.471Z",
+      "checkedInBy": "Petugas Meja Resepsionis"
+    },
+    {
+      "id": "gst-002",
+      "name": "Keluarga Besar Bpk. Sutikno",
+      "slug": "keluarga-besar-sutikno",
+      "code": "WED-KB-2041",
+      "phone": "",
+      "category": "Keluarga",
+      "tableOrSession": "Meja Keluarga Inti",
+      "pax": 4,
+      "rsvpStatus": "attending",
+      "rsvpPax": 4,
+      "rsvpMessage": "Alhamdulillah, selamat untuk anak tersayang Tika & Ridho. Lancar dan berkah selalu.",
+      "rsvpAt": "2026-11-11T06:43:12.824Z",
+      "isCheckedIn": true,
+      "checkInTime": "2026-11-11T11:13:12.824Z",
+      "createdAt": "2026-11-11T11:43:12.824Z"
+    },
+    {
+      "id": "gst-003",
+      "name": "Dimas Anggara, S.Kom",
+      "slug": "dimas-anggara",
+      "code": "WED-DA-5532",
+      "phone": "",
+      "category": "Sahabat",
+      "tableOrSession": "Sesi 2 (14.00 - 17.00 WIB)",
+      "pax": 1,
+      "rsvpStatus": "attending",
+      "rsvpPax": 1,
+      "isCheckedIn": true,
+      "createdAt": "2026-11-11T11:43:12.824Z",
+      "checkedInAt": "2026-11-11T11:55:21.933Z",
+      "checkedInBy": "Petugas Meja Resepsionis"
+    },
+    {
+      "id": "gst-004",
+      "name": "Rekan Kantor IT Solutions",
+      "slug": "rekan-kantor-it",
+      "code": "WED-RK-9104",
+      "phone": "",
+      "category": "Rekan Kerja",
+      "tableOrSession": "Sesi 2 (14.00 - 17.00 WIB)",
+      "pax": 3,
+      "rsvpStatus": "attending",
+      "rsvpPax": 3,
+      "rsvpMessage": "Happy Wedding Tika & Ridho! Samawa ya selalu!",
+      "rsvpAt": "2026-11-11T03:43:12.824Z",
+      "isCheckedIn": true,
+      "createdAt": "2026-11-11T11:43:12.824Z",
+      "checkedInAt": "2026-11-11T13:17:31.482Z",
+      "checkedInBy": "Petugas Meja Resepsionis"
+    },
+    {
+      "id": "gst-005",
+      "name": "Ibu Hj. Siti Nurhaliza",
+      "slug": "siti-nurhaliza",
+      "code": "WED-SN-7721",
+      "phone": "",
+      "category": "VIP",
+      "tableOrSession": "Sesi 1 (11.00 - 14.00 WIB)",
+      "pax": 2,
+      "rsvpStatus": "declined",
+      "rsvpPax": 0,
+      "rsvpMessage": "Mohon maaf ananda Tika & Ridho, kami sedang ada tugas dinas luar kota. Doa terbaik menyertai kalian berdua.",
+      "rsvpAt": "2026-11-10T23:43:12.824Z",
+      "isCheckedIn": false,
+      "createdAt": "2026-11-11T11:43:12.824Z"
+    }
+  ],
+  "wishes": [
+    {
+      "id": "wish-1794745622855-431",
+      "guestId": "gst-001",
+      "name": "Bpk. Rahmat Hidayat & Partner",
+      "attendance": "attending",
+      "message": "Selamat berbahagia Tika & Ridho! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah.",
+      "createdAt": "2026-11-15T12:27:02.855Z"
+    }
+  ]
+}
