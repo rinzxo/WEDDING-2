@@ -530,6 +530,33 @@ export default function WeddingSettingsPage() {
         {/* Tab 4: Rekening & Kado */}
         {activeTab === 'gifts' && (
           <div className="space-y-8">
+            {/* Master Toggle */}
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between">
+              <div>
+                <h4 className="font-semibold text-slate-800 text-sm">Tampilkan Bagian Amplop Digital</h4>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  Jika dinonaktifkan atau semua rekening dihapus/dimatikan, seluruh kartu amplop digital &amp; kado fisik akan otomatis hilang dari undangan tamu.
+                </p>
+              </div>
+              <label className="relative inline-flex items-center cursor-pointer select-none shrink-0 ml-4">
+                <input
+                  type="checkbox"
+                  checked={settings.digitalGifts.enabled !== false}
+                  onChange={(e) => {
+                    setSettings({
+                      ...settings,
+                      digitalGifts: {
+                        ...settings.digitalGifts,
+                        enabled: e.target.checked,
+                      },
+                    });
+                  }}
+                  className="sr-only peer"
+                />
+                <div className="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+              </label>
+            </div>
+
             <div>
               <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-100">
                 <div>
@@ -554,7 +581,7 @@ export default function WeddingSettingsPage() {
                       ...settings,
                       digitalGifts: {
                         ...settings.digitalGifts,
-                        bankAccounts: [...settings.digitalGifts.bankAccounts, newBank],
+                        bankAccounts: [...(settings.digitalGifts.bankAccounts || []), newBank],
                       },
                     });
                   }}
@@ -565,147 +592,181 @@ export default function WeddingSettingsPage() {
                 </button>
               </div>
 
-              <div className="space-y-4">
-                {settings.digitalGifts.bankAccounts.map((bank, idx) => {
-                  const isEnabled = bank.isActive !== false;
-                  return (
-                    <div
-                      key={bank.id}
-                      className={`p-4 rounded-xl border transition-all duration-200 ${
-                        isEnabled
-                          ? 'bg-slate-50/90 border-slate-200 shadow-sm'
-                          : 'bg-slate-100/60 border-slate-200/60 opacity-80'
-                      }`}
-                    >
-                      {/* Top Bar inside card: Status Badge & Toggle Switch */}
-                      <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-200/70">
-                        <div className="flex items-center gap-2">
-                          <span
-                            className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold border ${
-                              isEnabled
-                                ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
-                                : 'bg-slate-200 text-slate-600 border-slate-300'
-                            }`}
-                          >
+              {(!settings.digitalGifts.bankAccounts || settings.digitalGifts.bankAccounts.length === 0) ? (
+                <div className="p-6 rounded-xl border border-dashed border-slate-300 text-center bg-slate-50/50">
+                  <p className="text-xs text-slate-500">Belum ada rekening yang ditambahkan.</p>
+                  <p className="text-[11px] text-slate-400 mt-0.5">Klik tombol &quot;Tambah Rekening&quot; di atas untuk menambahkan rekening bank atau e-wallet baru.</p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {settings.digitalGifts.bankAccounts.map((bank, idx) => {
+                    const isEnabled = bank.isActive !== false;
+                    return (
+                      <div
+                        key={bank.id}
+                        className={`p-4 rounded-xl border transition-all duration-200 ${
+                          isEnabled
+                            ? 'bg-slate-50/90 border-slate-200 shadow-sm'
+                            : 'bg-slate-100/60 border-slate-200/60 opacity-80'
+                        }`}
+                      >
+                        {/* Top Bar inside card: Status Badge & Toggle Switch */}
+                        <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-200/70">
+                          <div className="flex items-center gap-2">
                             <span
-                              className={`w-2 h-2 rounded-full ${
-                                isEnabled ? 'bg-emerald-500 animate-pulse' : 'bg-slate-400'
+                              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold border ${
+                                isEnabled
+                                  ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                                  : 'bg-slate-200 text-slate-600 border-slate-300'
                               }`}
-                            />
-                            {isEnabled ? 'Muncul di Undangan' : 'Disembunyikan'}
-                          </span>
-                        </div>
+                            >
+                              <span
+                                className={`w-2 h-2 rounded-full ${
+                                  isEnabled ? 'bg-emerald-500 animate-pulse' : 'bg-slate-400'
+                                }`}
+                              />
+                              {isEnabled ? 'Muncul di Undangan' : 'Disembunyikan'}
+                            </span>
+                          </div>
 
-                        {/* Interactive Toggle Switch */}
-                        <label className="relative inline-flex items-center cursor-pointer select-none">
-                          <input
-                            type="checkbox"
-                            checked={isEnabled}
-                            onChange={(e) => {
-                              const updated = [...settings.digitalGifts.bankAccounts];
-                              updated[idx] = { ...updated[idx], isActive: e.target.checked };
-                              setSettings({
-                                ...settings,
-                                digitalGifts: { ...settings.digitalGifts, bankAccounts: updated },
-                              });
-                            }}
-                            className="sr-only peer"
-                          />
-                          <div className="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
-                          <span className="ml-2 text-xs font-semibold text-slate-700">
-                            {isEnabled ? 'Tampilkan' : 'Sembunyikan'}
-                          </span>
-                        </label>
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs items-end">
-                        <div>
-                          <label className="block font-semibold text-slate-700 uppercase mb-1">
-                            Nama Bank / E-Wallet
-                          </label>
-                          <input
-                            type="text"
-                            value={bank.bankName}
-                            onChange={(e) => {
-                              const updated = [...settings.digitalGifts.bankAccounts];
-                              updated[idx] = { ...updated[idx], bankName: e.target.value };
-                              setSettings({
-                                ...settings,
-                                digitalGifts: { ...settings.digitalGifts, bankAccounts: updated },
-                              });
-                            }}
-                            placeholder="Contoh: Bank BCA, BNI, Mandiri"
-                            className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white"
-                          />
-                        </div>
-                        <div>
-                          <label className="block font-semibold text-slate-700 uppercase mb-1">
-                            Nomor Rekening
-                          </label>
-                          <input
-                            type="text"
-                            value={bank.accountNumber}
-                            onChange={(e) => {
-                              const updated = [...settings.digitalGifts.bankAccounts];
-                              updated[idx] = { ...updated[idx], accountNumber: e.target.value };
-                              setSettings({
-                                ...settings,
-                                digitalGifts: { ...settings.digitalGifts, bankAccounts: updated },
-                              });
-                            }}
-                            placeholder="Contoh: 1234567890"
-                            className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white"
-                          />
-                        </div>
-                        <div className="flex gap-2">
-                          <div className="flex-1">
-                            <label className="block font-semibold text-slate-700 uppercase mb-1">
-                              Atas Nama
-                            </label>
+                          {/* Interactive Toggle Switch */}
+                          <label className="relative inline-flex items-center cursor-pointer select-none">
                             <input
-                              type="text"
-                              value={bank.accountHolder}
+                              type="checkbox"
+                              checked={isEnabled}
                               onChange={(e) => {
                                 const updated = [...settings.digitalGifts.bankAccounts];
-                                updated[idx] = { ...updated[idx], accountHolder: e.target.value };
+                                updated[idx] = { ...updated[idx], isActive: e.target.checked };
                                 setSettings({
                                   ...settings,
                                   digitalGifts: { ...settings.digitalGifts, bankAccounts: updated },
                                 });
                               }}
-                              placeholder="Nama Pemilik Rekening"
+                              className="sr-only peer"
+                            />
+                            <div className="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+                            <span className="ml-2 text-xs font-semibold text-slate-700">
+                              {isEnabled ? 'Tampilkan' : 'Sembunyikan'}
+                            </span>
+                          </label>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs items-end">
+                          <div>
+                            <label className="block font-semibold text-slate-700 uppercase mb-1">
+                              Nama Bank / E-Wallet
+                            </label>
+                            <input
+                              type="text"
+                              value={bank.bankName}
+                              onChange={(e) => {
+                                const updated = [...settings.digitalGifts.bankAccounts];
+                                updated[idx] = { ...updated[idx], bankName: e.target.value };
+                                setSettings({
+                                  ...settings,
+                                  digitalGifts: { ...settings.digitalGifts, bankAccounts: updated },
+                                });
+                              }}
+                              placeholder="Contoh: Bank BCA, BNI, Mandiri"
                               className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white"
                             />
                           </div>
-                          <button
-                            type="button"
-                            onClick={() => {
-                              const updated = settings.digitalGifts.bankAccounts.filter(
-                                (_, i) => i !== idx
-                              );
-                              setSettings({
-                                ...settings,
-                                digitalGifts: { ...settings.digitalGifts, bankAccounts: updated },
-                              });
-                            }}
-                            title="Hapus Rekening"
-                            className="p-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors h-[38px] flex items-center justify-center"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
+                          <div>
+                            <label className="block font-semibold text-slate-700 uppercase mb-1">
+                              Nomor Rekening
+                            </label>
+                            <input
+                              type="text"
+                              value={bank.accountNumber}
+                              onChange={(e) => {
+                                const updated = [...settings.digitalGifts.bankAccounts];
+                                updated[idx] = { ...updated[idx], accountNumber: e.target.value };
+                                setSettings({
+                                  ...settings,
+                                  digitalGifts: { ...settings.digitalGifts, bankAccounts: updated },
+                                });
+                              }}
+                              placeholder="Contoh: 1234567890"
+                              className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white"
+                            />
+                          </div>
+                          <div className="flex gap-2">
+                            <div className="flex-1">
+                              <label className="block font-semibold text-slate-700 uppercase mb-1">
+                                Atas Nama
+                              </label>
+                              <input
+                                type="text"
+                                value={bank.accountHolder}
+                                onChange={(e) => {
+                                  const updated = [...settings.digitalGifts.bankAccounts];
+                                  updated[idx] = { ...updated[idx], accountHolder: e.target.value };
+                                  setSettings({
+                                    ...settings,
+                                    digitalGifts: { ...settings.digitalGifts, bankAccounts: updated },
+                                  });
+                                }}
+                                placeholder="Nama Pemilik Rekening"
+                                className="w-full px-3 py-2 rounded-lg border border-slate-200 bg-white"
+                              />
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const updated = settings.digitalGifts.bankAccounts.filter(
+                                  (_, i) => i !== idx
+                                );
+                                setSettings({
+                                  ...settings,
+                                  digitalGifts: { ...settings.digitalGifts, bankAccounts: updated },
+                                });
+                              }}
+                              title="Hapus Rekening"
+                              className="p-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors h-[38px] flex items-center justify-center"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
-              </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
 
             {/* Physical Gift Address */}
             <div>
-              <h3 className="font-serif text-lg font-bold text-[#404f6a] mb-4 pb-2 border-b border-slate-100">
-                Alamat Kirim Kado Fisik
-              </h3>
+              <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-100">
+                <div>
+                  <h3 className="font-serif text-lg font-bold text-[#404f6a]">
+                    Alamat Kirim Kado Fisik
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Aktifkan jika ingin menyediakan opsi pengiriman kado fisik ke alamat Anda.
+                  </p>
+                </div>
+                <label className="relative inline-flex items-center cursor-pointer select-none shrink-0 ml-4">
+                  <input
+                    type="checkbox"
+                    checked={settings.digitalGifts.physicalGift?.enabled !== false}
+                    onChange={(e) => {
+                      setSettings({
+                        ...settings,
+                        digitalGifts: {
+                          ...settings.digitalGifts,
+                          physicalGift: {
+                            ...settings.digitalGifts.physicalGift,
+                            enabled: e.target.checked,
+                          },
+                        },
+                      });
+                    }}
+                    className="sr-only peer"
+                  />
+                  <div className="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+                </label>
+              </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                 <div>
                   <label className="block font-semibold text-slate-700 uppercase mb-1">Nama Penerima</label>

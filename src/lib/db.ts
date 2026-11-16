@@ -106,8 +106,10 @@ export interface WeddingSettings {
   };
   loveStory: LoveStoryItem[];
   digitalGifts: {
+    enabled?: boolean;
     bankAccounts: BankAccount[];
     physicalGift: {
+      enabled?: boolean;
       recipientName: string;
       phone: string;
       address: string;
