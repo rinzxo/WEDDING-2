@@ -126,11 +126,23 @@ export default function DigitalGiftSection({ gifts }: DigitalGiftSectionProps) {
                 ========================================================= */}
             {bankList.length > 0 && showAccounts && (
               <div className="w-full mt-8 flex flex-col gap-5 pt-6 border-t border-slate-200/80 animate-in fade-in zoom-in-95 duration-500">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
-                  {bankList.map((bank) => (
+                <div
+                  className={`w-full ${
+                    bankList.length === 1
+                      ? 'flex justify-center'
+                      : 'grid grid-cols-1 md:grid-cols-2 gap-5'
+                  }`}
+                >
+                  {bankList.map((bank, idx) => (
                     <div
                       key={bank.id}
-                      className={`relative w-full rounded-[22px] overflow-hidden p-6 text-left flex flex-col justify-between min-h-[200px] sm:min-h-[220px] transition-all duration-300 hover:scale-[1.02] border bg-gradient-to-br ${bank.theme} ${bank.borderGlow}`}
+                      className={`relative w-full ${
+                        bankList.length === 1
+                          ? 'max-w-md mx-auto'
+                          : bankList.length % 2 === 1 && idx === bankList.length - 1
+                          ? 'md:col-span-2 md:max-w-md md:mx-auto'
+                          : ''
+                      } rounded-[22px] overflow-hidden p-6 text-left flex flex-col justify-between min-h-[200px] sm:min-h-[220px] transition-all duration-300 hover:scale-[1.02] border bg-gradient-to-br ${bank.theme} ${bank.borderGlow}`}
                     >
                       {/* Atmospheric background waves & specular light reflections */}
                       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent pointer-events-none" />
