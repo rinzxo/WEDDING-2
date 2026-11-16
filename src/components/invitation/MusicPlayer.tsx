@@ -25,7 +25,7 @@ interface MusicPlayerProps {
 
 const MusicPlayer = forwardRef<MusicPlayerHandle, MusicPlayerProps>(function MusicPlayer(
   {
-    url = '/audio/sinarengan-reff.mp3',
+    url = '/audio/sinarengan-v2.mp3',
     autoPlay = false,
     startTime = 0,
   },
@@ -33,6 +33,7 @@ const MusicPlayer = forwardRef<MusicPlayerHandle, MusicPlayerProps>(function Mus
 ) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const fadeIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const playMusic = async () => {
     if (!audioRef.current) return;
@@ -40,15 +41,34 @@ const MusicPlayer = forwardRef<MusicPlayerHandle, MusicPlayerProps>(function Mus
       if (startTime > 0 && audioRef.current.currentTime < 1) {
         audioRef.current.currentTime = startTime;
       }
-      audioRef.current.volume = 0.75;
+      
+      // Smooth fade-in: start very softly and ramp smoothly to 0.75 over 1.2s
+      if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+      audioRef.current.volume = 0.05;
       await audioRef.current.play();
       setIsPlaying(true);
+
+      let currentVol = 0.05;
+      const targetVol = 0.75;
+      const step = 0.05;
+      fadeIntervalRef.current = setInterval(() => {
+        if (!audioRef.current || audioRef.current.paused) {
+          if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+          return;
+        }
+        currentVol = Math.min(targetVol, currentVol + step);
+        audioRef.current.volume = currentVol;
+        if (currentVol >= targetVol) {
+          if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+        }
+      }, 80);
     } catch {
       setIsPlaying(false);
     }
   };
 
   const pauseMusic = () => {
+    if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
     if (!audioRef.current) return;
     audioRef.current.pause();
     setIsPlaying(false);

@@ -76,7 +76,7 @@ export default function InvitationView({ settings, guest, wishes }: InvitationVi
       {/* Background Music Player (floating pill with spinning disc) */}
       <MusicPlayer
         ref={musicRef}
-        url={settings.music.url || '/audio/sinarengan-reff.mp3'}
+        url={settings.music.url || '/audio/sinarengan-v2.mp3'}
         title={settings.music.title}
         startTime={settings.music.startTime || 0}
         autoPlay={false}
