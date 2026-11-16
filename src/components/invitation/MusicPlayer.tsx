@@ -25,7 +25,7 @@ interface MusicPlayerProps {
 
 const MusicPlayer = forwardRef<MusicPlayerHandle, MusicPlayerProps>(function MusicPlayer(
   {
-    url = '/audio/sinarengan-v2.mp3',
+    url = '/audio/sinarengan-v3.mp3',
     autoPlay = false,
     startTime = 0,
   },
