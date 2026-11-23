@@ -111,8 +111,9 @@
       "/images/prewedding/cover.jpg"
     ],
     "cloudinary": {
-      "cloudName": "dnycjwpoj",
-      "uploadPreset": "SF-Wedding",
+      "cloudName": "djkkckmig",
+      "apiKey": "253526132855883",
+      "apiSecret": "AO5NZL5agr_HIxHnf8L96EoB5bo",
       "folder": "UNDANGAN"
     }
   },
