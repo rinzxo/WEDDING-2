@@ -110,8 +110,12 @@ export default function InvitationView({ settings, guest, wishes }: InvitationVi
         {/* 3. Love Story (interactive chapters 01, 02, 03 with photo preview & description) */}
         <LoveStorySection stories={settings.loveStory} />
 
-        {/* 4. The Story / Our Moments Gallery (3x3 Parallax photo frames with rotating active color) */}
-        <GallerySection photos={settings.gallery} />
+        {/* 4. The Story / Our Moments Gallery (Dynamic Grid / Masonry / Editorial) */}
+        <GallerySection
+          photos={settings.gallery}
+          items={settings.galleryItems}
+          config={settings.galleryConfig}
+        />
 
         {/* 5. Wedding Gift (Amplop Digital & Kado Fisik modal with copyable bank accounts) */}
         <DigitalGiftSection gifts={settings.digitalGifts} />

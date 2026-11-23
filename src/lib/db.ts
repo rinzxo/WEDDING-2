@@ -47,6 +47,30 @@ export interface BankAccount {
   isActive?: boolean;
 }
 
+export interface GalleryItem {
+  id: string;
+  url: string;
+  caption?: string;
+  aspect?: 'square' | 'portrait' | 'landscape' | 'wide' | 'auto';
+  span?: 'single' | 'wide' | 'full';
+}
+
+export interface GalleryConfig {
+  layout: 'masonry' | 'grid' | 'editorial';
+  columnsDesktop: 2 | 3 | 4;
+  columnsMobile: 1 | 2;
+  gap: 'sm' | 'md' | 'lg';
+  aspectRatio: 'original' | 'portrait' | 'square' | 'landscape';
+}
+
+export interface CloudinaryConfig {
+  cloudName: string;
+  apiKey?: string;
+  apiSecret?: string;
+  uploadPreset?: string;
+  folder?: string;
+}
+
 export interface WeddingSettings {
   groom: {
     fullName: string;
@@ -116,6 +140,9 @@ export interface WeddingSettings {
     };
   };
   gallery: string[];
+  galleryItems?: GalleryItem[];
+  galleryConfig?: GalleryConfig;
+  cloudinary?: CloudinaryConfig;
 }
 
 export interface DatabaseSchema {
