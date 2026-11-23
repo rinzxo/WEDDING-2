@@ -109,7 +109,12 @@
       "/images/prewedding/gallery-traditional-chair.jpg",
       "/images/prewedding/story-college.jpg",
       "/images/prewedding/cover.jpg"
-    ]
+    ],
+    "cloudinary": {
+      "cloudName": "dnycjwpoj",
+      "uploadPreset": "SF-Wedding",
+      "folder": "UNDANGAN"
+    }
   },
   "guests": [
     {
