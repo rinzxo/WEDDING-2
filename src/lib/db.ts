@@ -61,6 +61,7 @@ export interface GalleryConfig {
   columnsMobile: 1 | 2;
   gap: 'sm' | 'md' | 'lg';
   aspectRatio: 'original' | 'portrait' | 'square' | 'landscape';
+  maxPhotos?: number; // 0 atau undefined = tampilkan semua foto
 }
 
 export interface CloudinaryConfig {

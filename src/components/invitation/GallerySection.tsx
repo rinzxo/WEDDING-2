@@ -30,13 +30,16 @@ export default function GallerySection({
     '/images/prewedding/cover.jpg',
   ];
 
-  // Resolve active gallery list
-  const activePhotos: string[] =
+  // Resolve active gallery list & apply admin maxPhotos limit if set
+  const allPhotos: string[] =
     photos && photos.length > 0
       ? photos
       : items && items.length > 0
       ? items.map((it) => it.url)
       : defaultPhotos;
+
+  const maxLimit = config?.maxPhotos && config.maxPhotos > 0 ? config.maxPhotos : allPhotos.length;
+  const activePhotos = allPhotos.slice(0, maxLimit);
 
   // Active configuration defaults
   const activeLayout = config?.layout || 'editorial';

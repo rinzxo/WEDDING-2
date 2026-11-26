@@ -1607,6 +1607,64 @@ export default function WeddingSettingsPage() {
                   </div>
                 </div>
               </div>
+
+              {/* Jumlah Foto yang Ditampilkan */}
+              <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs">
+                <div>
+                  <label className="block font-semibold text-slate-700 uppercase">
+                    Jumlah Foto Ditampilkan
+                  </label>
+                  <p className="text-[11px] text-slate-500 mt-0.5">
+                    Batasi jumlah foto yang tampil di halaman undangan (urutan teratas akan diprioritaskan).
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2">
+                  <div className="flex items-center gap-1 p-1 bg-white rounded-xl border border-slate-200">
+                    {[
+                      { val: 0, label: 'Semua' },
+                      { val: 4, label: '4' },
+                      { val: 6, label: '6' },
+                      { val: 8, label: '8' },
+                      { val: 9, label: '9' },
+                      { val: 12, label: '12' },
+                    ].map((opt) => {
+                      const currentMax = settings.galleryConfig?.maxPhotos || 0;
+                      const isActive = currentMax === opt.val;
+                      return (
+                        <button
+                          key={opt.val}
+                          type="button"
+                          onClick={() => updateGalleryConfig('maxPhotos', opt.val)}
+                          className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                            isActive
+                              ? 'bg-[#2b3951] text-white shadow-sm'
+                              : 'text-slate-600 hover:text-slate-900'
+                          }`}
+                        >
+                          {opt.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  <div className="flex items-center gap-1.5 bg-white border border-slate-200 rounded-xl px-2.5 py-1">
+                    <span className="text-[11px] font-medium text-slate-500">Custom:</span>
+                    <input
+                      type="number"
+                      min={0}
+                      max={100}
+                      value={settings.galleryConfig?.maxPhotos || ''}
+                      placeholder="Semua"
+                      onChange={(e) => {
+                        const val = parseInt(e.target.value, 10);
+                        updateGalleryConfig('maxPhotos', Number.isNaN(val) || val <= 0 ? 0 : val);
+                      }}
+                      className="w-14 text-xs font-bold text-slate-800 outline-none bg-transparent text-center"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Section 3: Upload Foto Baru ke Cloudinary */}
@@ -1654,11 +1712,16 @@ export default function WeddingSettingsPage() {
             <div className="space-y-4 pt-4 border-t border-slate-200">
               <div className="flex items-center justify-between">
                 <div>
-                  <h4 className="font-serif text-base font-bold text-[#404f6a] flex items-center gap-2">
+                  <h4 className="font-serif text-base font-bold text-[#404f6a] flex items-center gap-2 flex-wrap">
                     <span>Daftar Foto Galeri</span>
                     <span className="px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-800 text-[11px] font-bold">
                       {settings.gallery?.length || 0} Foto
                     </span>
+                    {(settings.galleryConfig?.maxPhotos || 0) > 0 && (
+                      <span className="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[11px] font-bold">
+                        Ditampilkan: {Math.min(settings.galleryConfig!.maxPhotos!, settings.gallery?.length || 0)}
+                      </span>
+                    )}
                   </h4>
                   <p className="text-xs text-slate-500 mt-0.5">
                     Gunakan tombol panah untuk mengatur urutan foto, atau aktifkan mode &quot;Sorotan&quot; untuk memperbesar foto pada mode grid.
@@ -1676,13 +1739,15 @@ export default function WeddingSettingsPage() {
                     const item = settings.galleryItems?.[idx];
                     const isWide = item?.span === 'wide';
                     const isCloudinary = url.includes('cloudinary.com');
+                    const maxPhotos = settings.galleryConfig?.maxPhotos || 0;
+                    const isHiddenByLimit = maxPhotos > 0 && idx >= maxPhotos;
 
                     return (
                       <div
                         key={`${url}-${idx}`}
                         className={`group relative rounded-2xl overflow-hidden border bg-white shadow-sm hover:shadow-md transition-all duration-200 flex flex-col ${
                           isWide ? 'border-[#d7ac64] ring-2 ring-[#d7ac64]/20' : 'border-slate-200'
-                        }`}
+                        } ${isHiddenByLimit ? 'opacity-50' : ''}`}
                       >
                         {/* Photo Thumbnail Container */}
                         <div
