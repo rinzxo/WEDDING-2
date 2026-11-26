@@ -21,9 +21,17 @@ interface InvitationViewProps {
   settings: WeddingSettings;
   guest: Guest | null;
   wishes: Wish[];
+  guestName?: string;
+  isGeneral?: boolean;
 }
 
-export default function InvitationView({ settings, guest, wishes }: InvitationViewProps) {
+export default function InvitationView({
+  settings,
+  guest,
+  wishes,
+  guestName,
+  isGeneral,
+}: InvitationViewProps) {
   const musicRef = useRef<MusicPlayerHandle | null>(null);
 
   // Cover opening states for cinematic camera push-in
@@ -56,7 +64,8 @@ export default function InvitationView({ settings, guest, wishes }: InvitationVi
 
   const groomName = settings.groom.nickname || 'Ridho';
   const brideName = settings.bride.nickname || 'Tika';
-  const guestDisplayName = guest?.name || 'Tamu Undangan';
+  const isGeneralMode = isGeneral ?? !guest;
+  const guestDisplayName = guest?.name || guestName || 'Tamu Undangan';
 
   return (
     <div className="min-h-screen bg-[#f1f5f9] text-[#0f172a] relative selection:bg-blue-200 selection:text-blue-900 flex justify-center">
@@ -89,6 +98,7 @@ export default function InvitationView({ settings, guest, wishes }: InvitationVi
         <HeroSection
           settings={settings}
           guest={guest}
+          guestName={guestDisplayName}
           isOpeningCover={isOpeningCover}
           isCoverOpened={isCoverOpened}
         />
@@ -126,17 +136,20 @@ export default function InvitationView({ settings, guest, wishes }: InvitationVi
           initialWishes={wishes}
           rsvpConfirmed={rsvpConfirmed}
           onRsvpConfirmed={handleRsvpConfirmed}
+          isGeneral={isGeneralMode}
         />
 
-        {/* 7. Dynamic QR Code Ticket Pass (Locked until RSVP is confirmed, Download Pass button) */}
-        <QRCodeTicketSection
-          guest={guest}
-          groomName={groomName}
-          brideName={brideName}
-          eventDate={settings.eventDate}
-          venueName={settings.events.akad.venue}
-          rsvpConfirmed={rsvpConfirmed}
-        />
+        {/* 7. Dynamic QR Code Ticket Pass (Only for personalized guest invitations, not general mode) */}
+        {!isGeneralMode && (
+          <QRCodeTicketSection
+            guest={guest}
+            groomName={groomName}
+            brideName={brideName}
+            eventDate={settings.eventDate}
+            venueName={settings.events.akad.venue}
+            rsvpConfirmed={rsvpConfirmed}
+          />
+        )}
 
         {/* 8. Footer (Thank you note, monogram, credit, admin link) */}
         <FooterSection groomName={groomName} brideName={brideName} />

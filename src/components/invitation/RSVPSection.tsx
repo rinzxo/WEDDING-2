@@ -10,6 +10,7 @@ interface RSVPSectionProps {
   initialWishes: Wish[];
   rsvpConfirmed: boolean;
   onRsvpConfirmed: (confirmed: boolean, attendance: string, pax: number) => void;
+  isGeneral?: boolean;
 }
 
 export default function RSVPSection({
@@ -17,6 +18,7 @@ export default function RSVPSection({
   initialWishes,
   rsvpConfirmed,
   onRsvpConfirmed,
+  isGeneral = false,
 }: RSVPSectionProps) {
   const [attendance, setAttendance] = useState<'attending' | 'declined'>('attending');
   const [customName, setCustomName] = useState(guest?.name || '');
@@ -39,22 +41,32 @@ export default function RSVPSection({
     setFeedback(null);
 
     try {
-      const res = await fetch('/api/rsvp', {
+      const endpoint = isGeneral ? '/api/wishes' : '/api/rsvp';
+      const payload = isGeneral
+        ? {
+            name: guestDisplayName,
+            message: message.trim(),
+          }
+        : {
+            name: guestDisplayName,
+            attendance,
+            pax: attendance === 'declined' ? 0 : partySize,
+            message: message.trim(),
+            guestId: guest?.id,
+            guestCode: guest?.code,
+          };
+
+      const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: guestDisplayName,
-          attendance,
-          pax: attendance === 'declined' ? 0 : partySize,
-          message: message.trim(),
-          guestId: guest?.id,
-          guestCode: guest?.code,
-        }),
+        body: JSON.stringify(payload),
       });
 
       const data = await res.json();
       if (data.success) {
-        onRsvpConfirmed(true, attendance, partySize);
+        if (!isGeneral) {
+          onRsvpConfirmed(true, attendance, partySize);
+        }
         if (data.wish) {
           setWishes((prev) => [data.wish, ...prev]);
         }
@@ -154,40 +166,42 @@ export default function RSVPSection({
                   />
                 </div>
 
-                {/* Konfirmasi Kehadiran ? */}
-                <div>
-                  <label className="block text-[11px] md:text-xs font-semibold text-[#40506B] mb-2">
-                    Konfirmasi Kehadiran ?
-                  </label>
+                {/* Konfirmasi Kehadiran ? (Only for personalized guest RSVP) */}
+                {!isGeneral && (
+                  <div>
+                    <label className="block text-[11px] md:text-xs font-semibold text-[#40506B] mb-2">
+                      Konfirmasi Kehadiran ?
+                    </label>
 
-                  <div className="grid grid-cols-2 gap-2.5">
-                    <button
-                      type="button"
-                      onClick={() => setAttendance('attending')}
-                      className={`flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border text-xs md:text-sm font-semibold transition active:scale-95 cursor-pointer ${
-                        attendance === 'attending'
-                          ? 'border-emerald-500 bg-emerald-50 text-emerald-700 shadow-sm'
-                          : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
-                      }`}
-                    >
-                      <Check className="w-4 h-4 text-emerald-600" />
-                      <span>Hadir</span>
-                    </button>
+                    <div className="grid grid-cols-2 gap-2.5">
+                      <button
+                        type="button"
+                        onClick={() => setAttendance('attending')}
+                        className={`flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border text-xs md:text-sm font-semibold transition active:scale-95 cursor-pointer ${
+                          attendance === 'attending'
+                            ? 'border-emerald-500 bg-emerald-50 text-emerald-700 shadow-sm'
+                            : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                        }`}
+                      >
+                        <Check className="w-4 h-4 text-emerald-600" />
+                        <span>Hadir</span>
+                      </button>
 
-                    <button
-                      type="button"
-                      onClick={() => setAttendance('declined')}
-                      className={`flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border text-xs md:text-sm font-semibold transition active:scale-95 cursor-pointer ${
-                        attendance === 'declined'
-                          ? 'border-rose-500 bg-rose-50 text-rose-700 shadow-sm'
-                          : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
-                      }`}
-                    >
-                      <X className="w-4 h-4 text-rose-600" />
-                      <span>Tidak Hadir</span>
-                    </button>
+                      <button
+                        type="button"
+                        onClick={() => setAttendance('declined')}
+                        className={`flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border text-xs md:text-sm font-semibold transition active:scale-95 cursor-pointer ${
+                          attendance === 'declined'
+                            ? 'border-rose-500 bg-rose-50 text-rose-700 shadow-sm'
+                            : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                        }`}
+                      >
+                        <X className="w-4 h-4 text-rose-600" />
+                        <span>Tidak Hadir</span>
+                      </button>
+                    </div>
                   </div>
-                </div>
+                )}
 
                 {/* Submit Button */}
                 <button
@@ -228,13 +242,15 @@ export default function RSVPSection({
                           <span className="font-bold text-[#4A5A74] truncate max-w-[200px]">
                             {w.name}
                           </span>
-                          <span className={`text-[9px] md:text-[10px] font-bold px-2.5 py-0.5 rounded-full ${
-                            w.attendance === 'attending'
-                              ? 'bg-emerald-100 text-emerald-800'
-                              : 'bg-slate-100 text-slate-600'
-                          }`}>
-                            {w.attendance === 'attending' ? 'Hadir' : 'Tidak Hadir'}
-                          </span>
+                          {!isGeneral && (
+                            <span className={`text-[9px] md:text-[10px] font-bold px-2.5 py-0.5 rounded-full ${
+                              w.attendance === 'attending'
+                                ? 'bg-emerald-100 text-emerald-800'
+                                : 'bg-slate-100 text-slate-600'
+                            }`}>
+                              {w.attendance === 'attending' ? 'Hadir' : 'Tidak Hadir'}
+                            </span>
+                          )}
                         </div>
                         <p className="text-slate-600 italic leading-relaxed">
                           &ldquo;{w.message}&rdquo;

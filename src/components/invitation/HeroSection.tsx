@@ -7,6 +7,7 @@ import FlockOfBirds from './FlockOfBirds';
 interface HeroSectionProps {
   settings: WeddingSettings;
   guest: Guest | null;
+  guestName?: string;
   isOpeningCover?: boolean;
   isCoverOpened?: boolean;
 }
@@ -14,6 +15,7 @@ interface HeroSectionProps {
 export default function HeroSection({
   settings,
   guest,
+  guestName,
   isOpeningCover = false,
   isCoverOpened = false,
 }: HeroSectionProps) {
@@ -115,15 +117,15 @@ export default function HeroSection({
           </a>
 
           {/* Recipient badge */}
-          {guest && (
+          {(guest || guestName) && (
             <div className="mt-4 pt-3 border-t border-slate-300/60 w-full reveal delay-500">
               <p className="text-[10px] md:text-[11px] font-bodebeck uppercase tracking-wider text-slate-500">
                 Kepada Yth:
               </p>
               <p className="font-edensor text-base md:text-lg font-medium text-[#2E3F54]">
-                {guest.name}
+                {guest?.name || guestName}
               </p>
-              {guest.category && (
+              {guest?.category && (
                 <span className="inline-block mt-1 text-[9px] md:text-[10px] font-bodebeck uppercase tracking-wider text-[#40506B] bg-white/95 px-2.5 py-0.5 rounded-full border border-blue-100/80 shadow-xs">
                   {guest.category} &bull; {guest.tableOrSession || 'Regular'}
                 </span>
